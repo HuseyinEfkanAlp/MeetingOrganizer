@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meeting Organizer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+   
+    <h1>Add Meeting</h1>
+    <form action="/add_meeting" method="post">
+        <label for="topic">Topic:</label>
+        <input type="text" id="topic" name="topic" required><br>
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required><br>
+        <label for="start_time">Start Time:</label>
+        <input type="time" id="start_time" name="start_time" required><br>
+        <label for="end_time">End Time:</label>
+        <input type="time" id="end_time" name="end_time" required><br>
+        <label for="participants">Participants:</label>
+        <input type="text" id="participants" name="participants" required><br>
+        <input type="submit" value="Add Meeting">
+    </form>
+    <h2>Meetings</h2>
+    <table border="1">
+        <tr>
+            <th>Topic</th>
+            <th>Date</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Participants</th>
+            <th>Actions</th>
+        </tr>
+        {% for meeting in meetings %}
+            <tr>
+                <td>{{ meeting.topic }}</td>
+                <td>{{ meeting.date }}</td>
+                <td>{{ meeting.start_time }}</td>
+                <td>{{ meeting.end_time }}</td>
+                <td>{{ meeting.participants|join(', ') }}</td>
+                <td>
+                    <a href="/edit_meeting/{{ loop.index0 }}">Edit</a>
+                    <a href="/delete_meeting/{{ loop.index0 }}">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!-- templates/edit_meeting.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Meeting</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Edit Meeting</h2>
+    <form action="/edit_meeting/{{ meeting_id }}" method="post">
+        <label for="topic">Topic:</label>
+        <input type="text" id="topic" name="topic" value="{{ meeting.topic }}" required><br>
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" value="{{ meeting.date }}" required><br>
+        <label for="start_time">Start Time:</label>
+        <input type="time" id="start_time" name="start_time" value="{{ meeting.start_time }}" required><br>
+        <label for="end_time">End Time:</label>
+        <input type="time" id="end_time" name="end_time" value="{{ meeting.end_time }}" required><br>
+        <label for="participants">Participants (comma-separated):</label>
+        <input type="text" id="participants" name="participants" value="{{ meeting.participants|join(', ') }}" required><br>
+        <input type="submit" value="Save Changes">
+    </form>
+</body>
+</html>
